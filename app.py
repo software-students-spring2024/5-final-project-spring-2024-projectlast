@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for
 import pymongo
 
 
+cxn = pymongo.MongoClient(f"mongodb+srv://doadmin:y98s36dH7TXG20C4@db-mongodb-nyc3-08772-c20abe3e.mongo.ondigitalocean.com/admin")
 db = cxn["mongodb_dockerhub"]
 collection=db["logs"]
 
