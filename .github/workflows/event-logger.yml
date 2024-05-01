@@ -56,9 +56,10 @@ jobs:
           cat commits.json # debugging
           pipenv run gitcommitlogger -r $(echo $REPOSITORY_URL) -t $(echo $EVENT_TYPE) -i commits.json -o commit_stats.csv -u $(echo $COMMIT_LOG_API) -v
       - name: Publish to Docker Hub
-        uses: docker/build-push-actions@v1
+        uses: docker/build-push-action@v1
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: kevinli12390/fitness_app
           tags: latest, ${{ github.run_number }}
+
