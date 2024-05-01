@@ -62,4 +62,12 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: kevinli12390/fitness_app
           tags: latest, ${{ github.run_number }}
+      - name: Deploy to Digital Ocean
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.GITHUBREPO }}
+          script: |
+            doctl compute droplet create "subsystem-droplet" --size "s-1vcpu-1gb" --image "docker-18-04" --region "nyc3" --user-data '#!/bin/bash
+            docker pull kevinli12390/fitness_app:latest
+            docker run -d -p 80:80 kevinli12390/fitness_app:latest'
 
