@@ -54,20 +54,26 @@ jobs:
         run: |
           echo $COMMITS > commits.json
           cat commits.json # debugging
-          pipenv run gitcommitlogger -r $(echo $REPOSITORY_URL) -t $(echo $EVENT_TYPE) -i commits.json -o commit_stats.csv -u $(echo $COMMIT_LOG_API) -v
-      - name: Publish to Docker Hub
-        uses: docker/build-push-action@v2
+          pipenv run gitcommitlogger -r $(echo $REPOSITORY_URL) -t $(echo $EVENT_TYPE) -i commits.json -o commit_stats.csv -u $(echo $COMMIT_LOG_API) -v\
+      - name: Log in to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: kevinli12390/fitness_app
-          tags: latest, ${{ github.run_number }}
-      - name: Deploy to Digital Ocean
-        uses: digitalocean/action-doctl@v2
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
         with:
-          token: ${{ secrets.GITHUBREPO }}
-          script: |
-            doctl compute droplet create "subsystem-droplet" --size "s-1vcpu-1gb" --image "docker-18-04" --region "nyc3" --user-data '#!/bin/bash
-            docker pull kevinli12390/fitness_app:latest
-            docker run -d -p 80:80 kevinli12390/fitness_app:latest'
+          images: kevinli12390/fitness_app
+  
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
