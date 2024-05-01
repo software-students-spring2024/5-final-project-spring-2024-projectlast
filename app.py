@@ -1,4 +1,6 @@
-from flask import Flask, import pymongo, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for
+import pymongo
+
 
 #Connecting to the DB 
 cxn = pymongo.MongoClient("mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.5")
