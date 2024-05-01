@@ -1,26 +1,20 @@
-# Use Node.js base image
-FROM node:14
+# Use the official Python base image
+FROM python:3.9-slim
 
-# Set working directory in the container
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) to container
-COPY package*.json ./
+# Copy the Python dependency files into the container
+COPY Pipfile Pipfile.lock /app/
 
-# Install dependencies
-RUN npm install
+# Install dependencies using Pipenv
+RUN pip install pipenv && pipenv install --deploy --system
 
-# Copy the rest of the app
-COPY . .
+# Copy the Flask app code and static assets into the container
+COPY . /app/
 
-# Build the React application
-RUN npm run build
+# Expose the port the Flask app runs on
+EXPOSE 5000
 
-# Install serve to serve the build folder on port 3000
-RUN npm install -g serve
-
-# Expose the port the app runs on
-EXPOSE 3000
-
-# Command to serve the app using serve
-CMD ["serve", "-s", "build", "-l", "3000"]
+# Define the command to run the Flask application
+CMD ["python", "app.py"]
