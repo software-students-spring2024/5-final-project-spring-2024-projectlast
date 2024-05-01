@@ -11,7 +11,8 @@ COPY Pipfile Pipfile.lock /app/
 RUN pip install pipenv && pipenv install --deploy --system
 
 # Copy the Flask app code and static assets into the container
-COPY . /app/
+COPY app.py .
+COPY templates templates
 
 # Expose the port the Flask app runs on
 EXPOSE 5000
