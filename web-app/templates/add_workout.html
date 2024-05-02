@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Workout</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Add New Workout</h1>
+    <form action="{{ url_for('add_workout') }}" method="post">
+        <label for="type">Type of Exercise:</label>
+        <input type="text" name="type" required>
+        <label for="duration">Duration (minutes):</label>
+        <input type="number" name="duration" required>
+        <label for="intensity">Intensity:</label>
+        <input type="text" name="intensity" required>
+        <label for="date">Date:</label>
+        <input type="date" name="date" required>
+        <button type="submit">Add Workout</button>
+    </form>
+    <a href="{{ url_for('workout_list') }}">Back to List</a>
+</body>
+</html>

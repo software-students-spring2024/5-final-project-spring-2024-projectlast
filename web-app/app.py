@@ -18,7 +18,7 @@ app = Flask(__name__)
 # Routes
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template('index.html')
    
 @app.route('/workout_list')
 def workout_list():
