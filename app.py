@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, session
 from bson import ObjectId  
 import pymongo
@@ -11,6 +12,14 @@ from dotenv import load_dotenv
 
 client = MongoClient(os.getenv('MONGO_URI'))
 db = client[os.getenv('MONGO_DBNAME')]
+=======
+from flask import Flask, render_template, request, redirect, url_for
+import pymongo
+
+
+cxn = pymongo.MongoClient(f"mongodb+srv://doadmin:y98s36dH7TXG20C4@db-mongodb-nyc3-08772-c20abe3e.mongo.ondigitalocean.com/admin")
+db = cxn["mongodb_dockerhub"]
+>>>>>>> e22af11c0e7d06df959c939ce7c71be770d5a078
 collection=db["logs"]
 
 app = Flask(__name__)
@@ -132,4 +141,8 @@ def workout_stats():
 
 
 if __name__ == '__main__':
+<<<<<<< HEAD
     app.run(debug=True)
+=======
+    app.run(host='0.0.0.0', port=5000)
+>>>>>>> e22af11c0e7d06df959c939ce7c71be770d5a078

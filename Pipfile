@@ -10,6 +10,8 @@ flask-cors = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 psycopg2-binary = "*"
+requests = "*"
+pymongo = "*"
 
 [dev-packages]
 pytest = "*"
