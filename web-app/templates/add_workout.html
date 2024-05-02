@@ -1,3 +1,4 @@
+<!-- Corrected add_workout.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,13 +11,13 @@
     <h1>Add New Workout</h1>
     <form action="{{ url_for('add_workout') }}" method="post">
         <label for="type">Type of Exercise:</label>
-        <input type="text" name="type" required>
+        <input type="text" name="type" id="type" required>
         <label for="duration">Duration (minutes):</label>
-        <input type="number" name="duration" required>
+        <input type="number" name="duration" id="duration" required>
         <label for="intensity">Intensity:</label>
-        <input type="text" name="intensity" required>
+        <input type="text" name="intensity" id="intensity" required>
         <label for="date">Date:</label>
-        <input type="date" name="date" required>
+        <input type="date" name="date" id="date" required>
         <button type="submit">Add Workout</button>
     </form>
     <a href="{{ url_for('workout_list') }}">Back to List</a>

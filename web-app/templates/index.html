@@ -11,11 +11,10 @@
     <p>Your journey to a healthier lifestyle begins here.</p>
     <nav>
         <ul>
-            <li><a href="{{ url_for('dashboard') }}">Dashboard</a></li>
-            <li><a href="{{ url_for('log_exercise') }}">Log Exercise</a></li>
-            <li><a href="{{ url_for('view_exercises') }}">View Exercises</a></li>
-            <li><a href="{{ url_for('recommendations') }}">Recommendations</a></li>
-            <li><a href="{{ url_for('stats') }}">Statistics</a></li>
+            <li><a href="{{ url_for('workout_list') }}">View Workouts</a></li>
+            <li><a href="{{ url_for('add_workout') }}">Add New Workout</a></li>
+            <li><a href="{{ url_for('workout_stats') }}">Workout Statistics</a></li>
+            <li><a href="{{ url_for('reset_workout_log') }}">Reset Workout Log</a></li>
         </ul>
     </nav>
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>

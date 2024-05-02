@@ -8,17 +8,22 @@
 </head>
 <body>
     <h1>Edit Workout</h1>
-    <form action="{{ url_for('edit_workout', workout_id=workout._id) }}" method="post">
-        <label for="type">Type of Exercise:</label>
-        <input type="text" name="type" value="{{ workout.workout_type }}" required>
-        <label for="duration">Duration (minutes):</label>
-        <input type="number" name="duration" value="{{ workout.length_minutes }}" required>
-        <label for="intensity">Intensity:</label>
-        <input type="text" name="intensity" value="{{ workout.intensity }}" required>
-        <label for="date">Date:</label>
-        <input type="date" name="date" value="{{ workout.date }}" required>
-        <button type="submit">Update Workout</button>
-    </form>
-    <a href="{{ url_for('workout_list') }}">Back to List</a>
+    {% if workout %}
+        <form action="{{ url_for('edit_workout', workout_id=workout._id) }}" method="post">
+            <label for="type">Type of Exercise:</label>
+            <input type="text" name="type" id="type" value="{{ workout.workout_type }}" required>
+            <label for="duration">Duration (minutes):</label>
+            <input type="number" name="duration" id="duration" value="{{ workout.length_minutes }}" required>
+            <label for="intensity">Intensity:</label>
+            <input type="text" name="intensity" id="intensity" value="{{ workout.intensity }}" required>
+            <label for="date">Date:</label>
+            <input type="date" name="date" id="date" value="{{ workout.date }}" required>
+            <button type="submit">Update Workout</button>
+        </form>
+        <a href="{{ url_for('workout_list') }}">Back to List</a>
+    {% else %}
+        <p>No workout details available. Please check your selection.</p>
+        <a href="{{ url_for('workout_list') }}">Return to List</a>
+    {% endif %}
 </body>
 </html>
