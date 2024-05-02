@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Workout Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Reset Workout Log</h1>
+    <form action="{{ url_for('reset_workout_log') }}" method="post">
+        <p>Are you sure you want to reset all workouts?</p>
+        <button type="submit" name="confirm" value="yes">Yes, Reset</button>
+        <button type="submit" name="confirm" value="no">No, Cancel</button>
+    </form>
+    <a href="{{ url_for('workout_list') }}">Back to List</a>
+</body>
+</html>

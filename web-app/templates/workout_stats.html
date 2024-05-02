@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workout Statistics</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <h1>Workout Statistics</h1>
+    <p>Total Exercises Logged: {{ total_time }}</p>
+    <h2>Workout Types:</h2>
+    {% for type, count in category_counts.items() %}
+    <p>{{ type | capitalize }}: {{ count }}</p>
+    {% else %}
+    <p>No workout data available.</p>
+    {% endfor %}
+    <h2>Intensity Levels:</h2>
+    {% for intensity, count in intensity_counts.items() %}
+    <p>{{ intensity | capitalize }}: {{ count }}</p>
+    {% else %}
+    <p>No intensity data available.</p>
+    {% endfor %}
+    <a href="{{ url_for('home') }}">Home</a>
+</body>
+</html>
