@@ -23,7 +23,7 @@ def home():
 @app.route('/workout_list')
 def workout_list():
     workouts = collection.find()
-    return render_template('workout_list.html', workouts=workouts)
+    return render_template('view_exercises.html', workouts=workouts)
 
 # Edit a specific workout
 @app.route('/edit_workout/<string:workout_id>', methods=['GET', 'POST'])
