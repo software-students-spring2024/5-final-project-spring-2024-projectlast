@@ -1,8 +1,16 @@
-from flask import Flask, import pymongo, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
+from bson import ObjectId  
+import pymongo
+from pymongo import MongoClient
+import os
+
+from dotenv import load_dotenv
 
 #Connecting to the DB 
-cxn = pymongo.MongoClient("mongodb://<credentials>@127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+2.1.5")
-db = cxn["mongodb_dockerhub"]
+
+
+client = MongoClient(os.getenv('MONGO_URI'))
+db = client[os.getenv('MONGO_DBNAME')]
 collection=db["logs"]
 
 app = Flask(__name__)
@@ -10,7 +18,6 @@ app = Flask(__name__)
 # Routes
 @app.route('/')
 def home():
-   def home():
     return render_template('home.html')
    
 @app.route('/workout_list')
@@ -56,7 +63,7 @@ def add_workout():
         collection.insert_one(new_workout)
         
         # Redirect to the workout log page after adding the workout
-        return redirect(url_for('workout_log'))
+        return redirect(url_for('workout_list'))
     
     # Render the form to add a new workout
     return render_template('add_workout.html')
@@ -125,4 +132,4 @@ def workout_stats():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000)
+    app.run(debug=True)

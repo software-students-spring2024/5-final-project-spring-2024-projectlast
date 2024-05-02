@@ -1,0 +1,39 @@
+version: "3"
+services:
+  flask-app:
+    build: .
+    ports:
+      - 8000:5000
+    environment:
+      - MONGO_DBNAME=mongodb_dockerhub
+      - MONGO_URI=mongodb://admin:secret@mongodb:27017
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+      - FLASK_PORT=8000
+    env_file:
+      - .env
+    depends_on:
+      - mongodb
+
+  mongodb:
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=secret
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:
+
+- name: Install SSH Key
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_SECRET }}
+
+      
+- name: Deploy to Digital Ocean
+        run: |
+          ssh -o StrictHostKeyChecking=no root@164.90.141.130 << 'EOF'
