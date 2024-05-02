@@ -1,21 +1,23 @@
-# Use the official Python base image
+# Use an official Python runtime as a base image
 FROM python:3.9-slim
 
-# Set the working directory in the container
+# Set the working directory to /app
 WORKDIR /app
 
-# Copy the Python dependency files into the container
-COPY Pipfile Pipfile.lock /app/
+# Copy the current directory contents into the container at /app
+COPY . /app
 
-# Install dependencies using Pipenv
-RUN pip install pipenv && pipenv install --deploy --system
+# Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the Flask app code and static assets into the container
-COPY app.py .
-COPY templates templates
-
-# Expose the port the Flask app runs on
+# Make port 5000 available to the world outside this container
 EXPOSE 5000
 
-# Define the command to run the Flask application
-CMD ["python", "app.py"]
+# Define environment variable to specify where the Flask app is located
+ENV FLASK_APP app.py
+
+# Define environment variable to set the Flask environment to development or production
+ENV FLASK_ENV development
+
+# Run app.py when the container launches
+CMD ["flask", "run", "--host=0.0.0.0"]
