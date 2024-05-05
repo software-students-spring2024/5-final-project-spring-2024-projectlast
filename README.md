@@ -1,6 +1,6 @@
 # Final Project
 
 
-FitnessTracker: An python flask app that allows you to log your workouts and observe your statistics.
+FitnessTracker: A python flask app that allows you to log your workouts and observe your statistics.
 
 An exercise to put to practice software development teamwork, subsystem communication, containers, deployment, and CI/CD pipelines. See [instructions](./instructions.md) for details.
